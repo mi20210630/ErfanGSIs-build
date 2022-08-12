@@ -1,0 +1,71 @@
+name: build_ErfanGSIs
+
+on: 
+  workflow_dispatch:
+    inputs:
+      ROM_URL:
+        description: 'ROM_URL'
+        required: true
+      BUILD_TYPE:
+        description: 'BUILD_TYPE(AB or Aonly)'
+        required: true
+      ROM_TYPE:
+        description: 'ROM_TYPE'
+        required: true
+      RELEASE_NAME:
+        description: 'RELEASE_NAME'
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    if: github.event.repository.owner.id == github.event.sender.id
+
+    steps:
+       - name: Checkout
+         uses: actions/checkout@master
+           
+       - name: Initialization environment
+         run: |
+            sudo -E apt-get -qq install git wget
+       
+       - name: Clone ErfanGSI Source Code
+         run: | 
+            git clone --recurse-submodules https://github.com/erfanoabdi/ErfanGSIs.git ErfanGSIs
+         
+       - name: Fix exit
+         run: |
+              sed -i 's/\|\| exit 1//g' ErfanGSIs/url2GSI.sh
+              sed -i 's/exit 1//g' ErfanGSIs/url2GSI.sh
+       
+       - name: Setting up requirements
+         run: |
+              cd ErfanGSIs
+              mkdir ./output
+              sudo apt install python3-pip
+              sudo bash ./setup.sh
+       
+       - name: Download Stock Rom & Generate GSI
+         if: ${{ github.event.inputs.BUILD_TYPE }} == 'AB'
+         run: |
+              cd ErfanGSIs
+              sudo bash ./url2GSI.sh -c --ab "${{ github.event.inputs.ROM_URL }}" "${{ github.event.inputs.ROM_TYPE }}"
+         if: ${{ github.event.inputs.SGSI_TYPE }} == 'Aonly'
+         run: |
+              cd ErfanGSIs
+              sudo bash ./url2GSI.sh -c --aonly "${{ github.event.inputs.ROM_URL }}" "${{ github.event.inputs.ROM_TYPE }}"
+              
+       - name: Pack GSI
+         run: |
+              zip -r ErfanGSIs/output/GSI.zip ErfanGSIs/output/*
+              cd ErfanGSIs/output
+              mkdir upload
+              split -d -b 2048m - GSI.zip
+              
+       - name: Upload GSI
+         uses: ncipollo/release-action@v1.8.6
+         with:
+           artifacts: ErfanGSIs/output/*
+           name: "${{ github.event.inputs.RELEASE_NAME }}"
+           tag: "${{ github.event.inputs.RELEASE_NAME }}"
+           token: ${{ secrets.GITHUB_TOKEN }}
