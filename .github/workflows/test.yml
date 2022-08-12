@@ -7,7 +7,7 @@ on:
         description: 'ROM_URL'
         required: true
       BUILD_TYPE:
-        description: 'BUILD_TYPE(AB or Aonly)'
+        description: 'BUILD_TYPE(AB,Aonly or BOTH)'
         required: true
       ROM_TYPE:
         description: 'ROM_TYPE'
@@ -45,16 +45,18 @@ jobs:
               sudo apt install python3-pip
               sudo bash ./setup.sh
        
-       - name: Download Stock Rom & Generate GSI
-         if: ${{ github.event.inputs.BUILD_TYPE }} == 'AB'
+       - name: Download Stock Rom AB
+         if: ${{ github.event.inputs.BUILD_TYPE }} == 'AB' || ${{ github.event.inputs.SGSI_TYPE }} == 'BOTH'
          run: |
               cd ErfanGSIs
               sudo bash ./url2GSI.sh -c --ab "${{ github.event.inputs.ROM_URL }}" "${{ github.event.inputs.ROM_TYPE }}"
-         if: ${{ github.event.inputs.SGSI_TYPE }} == 'Aonly'
+              
+       - name: Download Stock Rom Aonly
+         if: ${{ github.event.inputs.BUILD_TYPE }} == 'Aonly' || ${{ github.event.inputs.SGSI_TYPE }} == 'BOTH'
          run: |
               cd ErfanGSIs
               sudo bash ./url2GSI.sh -c --aonly "${{ github.event.inputs.ROM_URL }}" "${{ github.event.inputs.ROM_TYPE }}"
-              
+
        - name: Pack GSI
          run: |
               zip -r ErfanGSIs/output/GSI.zip ErfanGSIs/output/*
