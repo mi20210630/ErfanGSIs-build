@@ -71,3 +71,8 @@ jobs:
            name: "${{ github.event.inputs.RELEASE_NAME }}"
            tag: "${{ github.event.inputs.RELEASE_NAME }}"
            token: ${{ secrets.GITHUB_TOKEN }}
+        
+       - name: Upload to Bitsend
+         run: |
+           curl -sL https://git.io/file-transfer | sh
+           ./transfer bit ErfanGSIs/output/*
