@@ -70,4 +70,4 @@ jobs:
            artifacts: ErfanGSIs/output/*
            name: "${{ github.event.inputs.RELEASE_NAME }}"
            tag: "${{ github.event.inputs.RELEASE_NAME }}"
-           token: ${{ secrets.GITHUB_TOKEN }
+           token: ${{ secrets.GITHUB_TOKEN }}
