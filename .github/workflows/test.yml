@@ -60,7 +60,7 @@ jobs:
        - name: Pack GSI
          run: |
            sudo apt install tar gzip
-           tar -cvf ErfanGSIs/output/GSI.tar ErfanGSIs/output/*
+           tar -cvf ErfanGSIs/output/GSI.tar ErfanGSIs/output
            gzip -9 -c ErfanGSIs/output/GSI.tar > GSI.tar.gz
               
        - name: Upload GSI
