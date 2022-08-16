@@ -59,10 +59,10 @@ jobs:
 
        - name: Pack GSI
          run: |
-              zip -r ErfanGSIs/output/GSI.zip ErfanGSIs/output/*
-              cd ErfanGSIs/output
-              mkdir upload
-              split -d -b 2048m - GSI.zip
+
+
+           tar -cvf /ErfanGSIs/output/GSI.tar /ErfanGSIs/output
+           gzip -9 -c GSI.tar > GSI.tar.gz
               
        - name: Upload GSI
          uses: ncipollo/release-action@v1.8.6
@@ -70,9 +70,4 @@ jobs:
            artifacts: ErfanGSIs/output/*
            name: "${{ github.event.inputs.RELEASE_NAME }}"
            tag: "${{ github.event.inputs.RELEASE_NAME }}"
-           token: ${{ secrets.GITHUB_TOKEN }}
-        
-       - name: Upload to Bitsend
-         run: |
-           curl -sL https://git.io/file-transfer | sh
-           ./transfer bit ErfanGSIs/output/*
+           token: ${{ secrets.GITHUB_TOKEN }
