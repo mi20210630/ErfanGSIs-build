@@ -57,6 +57,6 @@ jobs:
          uses: ncipollo/release-action@v1.8.6
          with:
            artifacts: ErfanGSIs/output/*
-           name: "${{ github.event.inputs.RELEASE_NAME }}"
-           tag: "${{ github.event.inputs.RELEASE_NAME }}"
+           name: ErfanGSI
+           tag: ErfanGSI
            token: ${{ secrets.GITHUB_TOKEN }}
