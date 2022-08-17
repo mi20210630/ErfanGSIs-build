@@ -22,6 +22,9 @@ jobs:
        - name: Checkout
          uses: actions/checkout@master
            
+       - name: Clean Workspace
+         uses: mickem/clean-after-action@v1.1.1
+         
        - name: Initialization environment
          run: |
             sudo -E apt-get -qq install git wget
