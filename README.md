@@ -61,7 +61,7 @@ tar xzvf 文件.tar.gz                   # 解压缩文件
 > Pixel
 
 ## 联系 ##
-> 酷安：mi20210630
+> 酷安：[mi20210630](https://www.coolapk.com/u/mi20210630)
 
 > 邮箱：shanghaizhouwanli@163.com
 
