@@ -1,4 +1,4 @@
-name: ErfanGSIs-build-AB
+name: build_ErfanGSIs
 
 on: 
   workflow_dispatch:
@@ -22,9 +22,6 @@ jobs:
        - name: Checkout
          uses: actions/checkout@master
            
-       - name: Clean Workspace
-         uses: mickem/clean-after-action@v1.1.1
-         
        - name: Initialization environment
          run: |
             sudo -E apt-get -qq install git wget
@@ -45,7 +42,7 @@ jobs:
               sudo apt install python3-pip
               sudo bash ./setup.sh
        
-       - name: Download Stock Rom AB
+       - name: Download Stock Rom
          run: |
               cd ErfanGSIs
               sudo bash ./url2GSI.sh -c --ab "${{ github.event.inputs.ROM_URL }}" "${{ github.event.inputs.ROM_TYPE }}"
@@ -53,8 +50,9 @@ jobs:
        - name: Pack GSI
          run: |
            sudo apt install tar gzip
-           tar -zcvf -9 ErfanGSIs/output/GSI.tar.gz ErfanGSIs/output
-       
+           tar -cvf ErfanGSIs/output/GSI.tar ErfanGSIs/output
+           gzip -9 -c ErfanGSIs/output/GSI.tar > GSI.tar.gz
+              
        - name: Upload GSI
          uses: ncipollo/release-action@v1.8.6
          with:
