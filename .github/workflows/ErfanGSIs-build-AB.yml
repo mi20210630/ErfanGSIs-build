@@ -59,4 +59,4 @@ jobs:
            artifacts: ErfanGSIs/output/*
            name: ErfanGSI
            tag: ErfanGSI
-           token: ${{ secrets.GITHUB_TOKEN }}
+           token: ${{ secrets.UPLOAD }}
