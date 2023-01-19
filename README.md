@@ -65,5 +65,5 @@ tar xzvf 文件.tar.gz                   # 解压缩文件
 
 > 邮箱：shanghaizhouwanli@163.com
 
-> Github: [ShanghaiZhouWanLi](https://github.com/ShanghaiZhouWanLi)
+> Github: [ShanghaiZhouWanLi](https://github.com/mi20210630)
 
