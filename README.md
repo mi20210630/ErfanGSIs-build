@@ -60,6 +60,8 @@ tar xzvf 文件.tar.gz                   # 解压缩文件
 > Generic
 	
 > Pixel
+## 安卓13： ##
+> Generic
 
 ## 联系 ##
 > 酷安：[mi20210630](https://www.coolapk.com/u/mi20210630)
