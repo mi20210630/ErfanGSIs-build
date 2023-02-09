@@ -1,10 +1,9 @@
-# ErfanGSIs-build
+# ErfanGSIs-online
 
 ## 一个自动跑 ErfanGSIs 的脚本。 
 ### 步骤如下： 
 - 首先，fork 这个仓库。 
-- 去.github/workflows/build.yml里在env中修改内容
-- 去actions里，点击Select Workflow，选择ErfanGSI-build, 点击Run Workflow
+- 然后去.github/workflows/*的env中修改内容
 - 最后，在 Release 里下载
 
 ## 其他注意事项 ##
@@ -60,13 +59,13 @@ tar xzvf 文件.tar.gz                   # 解压缩文件
 > Generic
 	
 > Pixel
-## 安卓13： ##
+### 安卓13: ##
 > Generic
-
+### 安卓14（Upsidedowncake）:
+> Generic
 ## 联系 ##
 > 酷安：[mi20210630](https://www.coolapk.com/u/mi20210630)
 
 > 邮箱：shanghaizhouwanli@163.com
 
 > Github: [ShanghaiZhouWanLi](https://github.com/mi20210630)
-
